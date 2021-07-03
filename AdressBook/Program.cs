@@ -10,9 +10,8 @@ namespace AdressBook
 
             while (true)
             {
-                Console.WriteLine("*********************************************************");
                 Console.WriteLine("1. Add member to Contact list \n2.View Members in Contact List\n3.Exit");
-                Console.WriteLine("Enter an option:");
+                Console.WriteLine("\nEnter an option:");
                 switch (Convert.ToInt32(Console.ReadLine()))
                 {
                     case 1:

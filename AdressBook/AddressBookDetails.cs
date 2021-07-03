@@ -26,6 +26,9 @@ namespace AdressBook
             person.zipCode = Convert.ToInt32(Console.ReadLine());
             Console.Write("Enter Phone Number: ");
             person.phoneNumber = Console.ReadLine(); ;
+            Console.Write("Enter Email id :");
+            person.email = Console.ReadLine();
+
 
             People.Add(person);
 
@@ -51,13 +54,14 @@ namespace AdressBook
 
         public static void PrintValues(Person person)
         {
-            Console.WriteLine($"First Name : {person.firstName}");
-            Console.WriteLine($"Last Name : {person.lastName}");
-            Console.WriteLine($"Address : {person.address}");
-            Console.WriteLine($"City : {person.city}");
-            Console.WriteLine($"State : {person.state}");
-            Console.WriteLine($"Zip Code: {person.zipCode}");
-            Console.WriteLine($"Phone Number: {person.phoneNumber}");
+            Console.WriteLine($"First Name : {person.firstName}\n");
+            Console.WriteLine($"Last Name : {person.lastName}\n");
+            Console.WriteLine($"Address : {person.address}\n");
+            Console.WriteLine($"City : {person.city}\n");
+            Console.WriteLine($"State : {person.state}\n");
+            Console.WriteLine($"Zip Code: {person.zipCode}\n");
+            Console.WriteLine($"Phone Number: {person.phoneNumber}\n");
+            Console.WriteLine($"Email id: {person.email}\n");
         }
     }
 }
