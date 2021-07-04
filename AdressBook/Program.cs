@@ -7,6 +7,7 @@ namespace AdressBook
         static void Main(string[] args)
         {
             Console.WriteLine("welcome to Address book problem ");
+            AddressBookDetails abd = new AddressBookDetails();
 
             while (true)
             {
@@ -15,16 +16,16 @@ namespace AdressBook
                 switch (Convert.ToInt32(Console.ReadLine()))
                 {
                     case 1:
-                        AddressBookDetails.AddPerson();
+                        abd.AddPerson();
                         break;
                     case 2:
-                        AddressBookDetails.ListPeople();
+                        abd.ListPeople();
                         break;
                     case 3:
-                        AddressBookDetails.DeleteDetails();
+                        abd.DeleteDetails();
                         break;
                     case 4:
-                        AddressBookDetails.EditDetails();
+                        abd.EditDetails();
                         break;
                     case 5:
                         // to exit from main method
