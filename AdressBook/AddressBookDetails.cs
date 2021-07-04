@@ -9,31 +9,35 @@ namespace AdressBook
         private static List<Person> People = new List<Person>();
         public static void AddPerson()
         {
-            //object for person class
-            Person person = new Person();
+            Console.WriteLine("enter number of contacts to be add :");
+            int numOfPeople = Convert.ToInt32(Console.ReadLine());
+            while (numOfPeople > 0)
+            {
+                Person person = new Person();
 
-            Console.Write("Enter First Name: ");
-            person.firstName = Console.ReadLine();
-            Console.Write("Enter Last Name: ");
-            person.lastName = Console.ReadLine();
-            Console.Write("Enter Address: ");
-            person.address = Console.ReadLine();
-            Console.Write("Enter City: ");
-            person.city = Console.ReadLine();
-            Console.Write("Enter State: ");
-            person.state = Console.ReadLine();
-            Console.Write("Enter Zip Code: ");
-            person.zipCode = Convert.ToInt32(Console.ReadLine());
-            Console.Write("Enter Phone Number: ");
-            person.phoneNumber = Console.ReadLine(); ;
-            Console.Write("Enter Email id :");
-            person.email = Console.ReadLine();
+                Console.Write("Enter First Name: ");
+                person.firstName = Console.ReadLine();
+                Console.Write("Enter Last Name: ");
+                person.lastName = Console.ReadLine();
+                Console.Write("Enter Address: ");
+                person.address = Console.ReadLine();
+                Console.Write("Enter City: ");
+                person.city = Console.ReadLine();
+                Console.Write("Enter State: ");
+                person.state = Console.ReadLine();
+                Console.Write("Enter Zip Code: ");
+                person.zipCode = Convert.ToInt32(Console.ReadLine());
+                Console.Write("Enter Phone Number: ");
+                person.phoneNumber = Console.ReadLine(); ;
+                Console.Write("Enter Email id :");
+                person.email = Console.ReadLine();
 
+                People.Add(person);
+                Console.WriteLine("Added successfully");
+                numOfPeople--;
 
-            People.Add(person);
-
+            }
         }
-
         public static void ListPeople()
         {
             if (People.Count > 0)
