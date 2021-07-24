@@ -41,25 +41,46 @@ namespace AdressBook
             {
                 //object for person class
                 Person person = new Person();
+                while (true)
+                {
+                    Console.Write("Enter First Name: ");
+                    string firstName = Console.ReadLine();
+                    if (people.Count > 0)
+                    {
+                        var x = people.Find(x => x.FirstName.Equals(firstName));
+                        if (x != null)
+                        {
+                            Console.WriteLine("Your name  already exists");
+                        }
+                        else
+                        {
+                            person.FirstName = firstName;
+                            break;
+                        }
+                    }
+                    else
+                    {
+                        person.FirstName = firstName;
+                        break;
+                    }
 
-                Console.Write("Enter First Name: ");
-                person.firstName = Console.ReadLine();
+                }
                 Console.Write("Enter Last Name: ");
-                person.lastName = Console.ReadLine();
+                person.LastName = Console.ReadLine();
                 Console.Write("Enter Address: ");
-                person.address = Console.ReadLine();
+                person.Address = Console.ReadLine();
                 Console.Write("Enter City: ");
-                person.city = Console.ReadLine();
+                person.City = Console.ReadLine();
                 Console.Write("Enter State: ");
-                person.state = Console.ReadLine();
+                person.State = Console.ReadLine();
                 Console.Write("Enter Zip Code: ");
-                person.zipCode = Convert.ToInt32(Console.ReadLine());
+                person.ZipCode = Convert.ToInt32(Console.ReadLine());
                 Console.Write("Enter Phone Number: ");
                 string phNo = Console.ReadLine();
-                person.phoneNumber = phNo;
+                person.PhoneNumber = phNo;
                 Console.Write("Enter Email-id: ");
                 string emailId = Console.ReadLine();
-                person.email = emailId;
+                person.Email = emailId;
                 people.Add(person);
                 numOfContacts--;
             }
@@ -90,14 +111,14 @@ namespace AdressBook
         //Printing values
         public void PrintValues(Person x)
         {
-            Console.WriteLine("First Name : {x.firstName}");
-            Console.WriteLine("Last Name : {x.lastName}");
-            Console.WriteLine("Address : {x.address}");
-            Console.WriteLine("City : {x.city}");
-            Console.WriteLine("State : {x.state}");
-            Console.WriteLine("Zip Code: {x.zipCode}");
-            Console.WriteLine("Phone Number: {x.phoneNumber}");
-            Console.WriteLine("Email: {x.email}");
+            Console.WriteLine($"First Name : {x.FirstName}");
+            Console.WriteLine($"Last Name : {x.LastName}");
+            Console.WriteLine($"Address : {x.Address}");
+            Console.WriteLine($"City : {x.City}");
+            Console.WriteLine($"State : {x.State}");
+            Console.WriteLine($"Zip Code: {x.ZipCode}");
+            Console.WriteLine($"Phone Number: {x.PhoneNumber}");
+            Console.WriteLine($"Email: {x.Email}");
         }
         public void EditDetails()
         {
@@ -109,7 +130,7 @@ namespace AdressBook
 
                 foreach (var person in people)
                 {
-                    if (editName.ToLower() == person.firstName.ToLower())
+                    if (editName.ToLower() == person.FirstName.ToLower())
                     {
                         while (true)
                         {
@@ -120,44 +141,44 @@ namespace AdressBook
                             {
                                 case 1:
                                     Console.WriteLine("Enter New First name");
-                                    person.firstName = Console.ReadLine();
+                                    person.FirstName = Console.ReadLine();
                                     Console.WriteLine("Firist name Modified");
                                     break;
                                 case 2:
                                     Console.WriteLine("Enter New Last name");
-                                    person.lastName = Console.ReadLine();
+                                    person.LastName = Console.ReadLine();
                                     Console.WriteLine("Last name Modified");
                                     break;
                                 case 3:
                                     Console.WriteLine("Enter New Address");
-                                    person.address = Console.ReadLine();
+                                    person.Address = Console.ReadLine();
                                     Console.WriteLine("Address Modified");
                                     break;
                                 case 4:
                                     Console.WriteLine("Enter New City");
-                                    person.city = Console.ReadLine();
+                                    person.City = Console.ReadLine();
                                     Console.WriteLine("City Modified");
                                     break;
                                 case 5:
                                     Console.WriteLine("Enter New State");
-                                    person.state = Console.ReadLine();
+                                    person.State = Console.ReadLine();
                                     Console.WriteLine("State Modified");
                                     break;
                                 case 6:
                                     Console.WriteLine("Enter New Zip Code");
-                                    person.zipCode = Convert.ToInt32(Console.ReadLine());
+                                    person.ZipCode = Convert.ToInt32(Console.ReadLine());
                                     Console.WriteLine("ZipCode Modified");
                                     break;
                                 case 7:
                                     Console.Write("Enter new Phone Number: ");
                                     string phNo = Console.ReadLine();
-                                    person.phoneNumber = phNo;
+                                    person.PhoneNumber = phNo;
                                     Console.WriteLine("Phone Number Modified");
                                     break;
                                 case 8:
                                      Console.Write("Enter new Email-id: ");
                                      string emailId = Console.ReadLine();
-                                     person.email = emailId;
+                                     person.Email = emailId;
                                      Console.WriteLine("Email id Modified");
                                     break;
                                 case 9:
@@ -194,7 +215,7 @@ namespace AdressBook
 
                 foreach (var x in people)
                 {
-                    if (deleteName.ToLower() == x.firstName.ToLower())
+                    if (deleteName.ToLower() == x.FirstName.ToLower())
                     {
                         //removing from list
                         Console.WriteLine("***************DELETED****************");

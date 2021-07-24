@@ -13,7 +13,8 @@ namespace AdressBook
             {
                 Console.WriteLine("1. Add member to Contact list \n2. View Members in Contact List \n3. Delete members in Contact list \n4. Edit existing contact in List\n5. Exit");
                 Console.WriteLine("\nEnter an option:");
-                switch (Convert.ToInt32(Console.ReadLine()))
+                int option = Convert.ToInt32(Console.ReadLine());
+                switch (option)
                 {
                     case 1:
                         abd.AddPerson();
@@ -27,9 +28,8 @@ namespace AdressBook
                     case 4:
                         abd.EditDetails();
                         break;
-                    case 5:
-                        // to exit from main method
-                        return;
+                    default:
+                        break;
                 }
             }
         }
