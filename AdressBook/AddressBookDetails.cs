@@ -9,6 +9,7 @@ namespace AdressBook
         private List<Person> people;
         private static List<Person> searchContacts = new List<Person>();
         private static List<Person> viewContacts = new List<Person>();
+        private int countCity = 0, countState = 0;
         private static Dictionary<string, List<Person>> addressBookDictionary = new Dictionary<string, List<Person>>();
         public void AddPerson()
         {
@@ -36,7 +37,6 @@ namespace AdressBook
                 }
 
             }
-
             Console.Write("Enter Number of contacts to add:");
             int numOfContacts = Convert.ToInt32(Console.ReadLine());
             while (numOfContacts > 0)
@@ -65,7 +65,6 @@ namespace AdressBook
                         person.FirstName = firstName;
                         break;
                     }
-
                 }
                 Console.Write("Enter Last Name: ");
                 person.LastName = Console.ReadLine();
@@ -86,7 +85,6 @@ namespace AdressBook
                 people.Add(person);
                 numOfContacts--;
             }
-            //adding into address book dictionary
             addressBookDictionary.Add(addressBookName, people);
             Console.WriteLine("Successfully Added");
         }
@@ -338,7 +336,6 @@ namespace AdressBook
                     return;
 
             }
-
         }
         public void ViewByCityName(string cityName)
         {
@@ -385,6 +382,98 @@ namespace AdressBook
                 else
                 {
                     Console.WriteLine("No Persons found");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Adress book is empty");
+            }
+        }
+        public void CountByStateOrCity()
+        {
+
+            Console.WriteLine("1.Count by city name\n2.Count By state name\nEnter your option:");
+            switch (Convert.ToInt32(Console.ReadLine()))
+            {
+                case 1:
+                    Console.WriteLine("Enter the name of city in which you want to count persons:");
+                    string cityName = Console.ReadLine();
+                    ViewByCityName(cityName, "count");
+                    break;
+                case 2:
+                    Console.WriteLine("Enter the name of state in which you want to count persons:");
+                    string stateName = Console.ReadLine();
+                    ViewByStateName(stateName, "count");
+                    break;
+                default:
+                    return;
+            }
+
+        }
+        public void ViewByCityName(string cityName, string check)
+        {
+            if (addressBookDictionary.Count > 0)
+            {
+
+                foreach (KeyValuePair<string, List<Person>> dict in addressBookDictionary)
+                {
+                    viewContacts = dict.Value.FindAll(x => x.tate.Equals(cityName));
+                }
+                if (check.Equals("view"))
+                {
+                    if (viewContacts.Count > 0)
+                    {
+                        foreach (var x in viewContacts)
+                        {
+                            PrintValues(x);
+                        }
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("No Details found ");
+                    }
+                }
+                else
+                {
+                    countCity = viewContacts.Count;
+                    Console.WriteLine($"The total persons in {cityName} are : {countCity}");
+                }
+
+            }
+            else
+            {
+                Console.WriteLine("Adress book is empty");
+            }
+        }
+        public void ViewByStateName(string stateName, string check)
+        {
+            if (addressBookDictionary.Count > 0)
+            {
+
+                foreach (KeyValuePair<string, List<Person>> dict in addressBookDictionary)
+                {
+                    viewContacts = dict.Value.FindAll(x => x.State.Equals(stateName));
+                }
+                if (check.Equals("view"))
+                {
+                    if (viewContacts.Count > 0)
+                    {
+                        foreach (var x in viewContacts)
+                        {
+                            PrintValues(x);
+                        }
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("No Details found ");
+                    }
+                }
+                else
+                {
+                    countState = viewContacts.Count;
+                    Console.WriteLine($"The total persons in {stateName} are : {countState}");
                 }
             }
             else
