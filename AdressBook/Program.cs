@@ -7,28 +7,32 @@ namespace AdressBook
         static void Main(string[] args)
         {
             Console.WriteLine("welcome to Address book problem ");
-            AddressBookDetails abd = new AddressBookDetails();
+            AddressBookDetails addressBookDetails = new AddressBookDetails();
 
             while (true)
             {
-                Console.WriteLine("1. Add member to Contact list \n2. View Members in Contact List \n3. Delete members in Contact list \n4. Edit existing contact in List\n5. Exit");
+                Console.WriteLine("1. Add member to Contact list \n2. View Members in Contact List \n3. Delete members in Contact list \n4. Edit existing contact in List\n5. search a person\n6. Exit");
                 Console.WriteLine("\nEnter an option:");
                 int option = Convert.ToInt32(Console.ReadLine());
                 switch (option)
                 {
                     case 1:
-                        abd.AddPerson();
+                        addressBookDetails.AddPerson();
                         break;
                     case 2:
-                        abd.ListPeople();
+                        addressBookDetails.ListPeople();
                         break;
                     case 3:
-                        abd.DeleteDetails();
+                        addressBookDetails.DeleteDetails();
                         break;
                     case 4:
-                        abd.EditDetails();
+                        addressBookDetails.EditDetails();
                         break;
-                    default:
+                    case 5:
+                        addressBookDetails.SearchDetails();
+                        break;
+                    case 6:
+                        Console.WriteLine("exit");
                         break;
                 }
             }

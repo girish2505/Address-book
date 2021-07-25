@@ -7,6 +7,7 @@ namespace AdressBook
     class AddressBookDetails
     {
         private List<Person> people;
+        private static List<Person> searchContacts = new List<Person>();
         private static Dictionary<string, List<Person>> addressBookDictionary = new Dictionary<string, List<Person>>();
         public void AddPerson()
         {
@@ -94,7 +95,7 @@ namespace AdressBook
             {
                 foreach (KeyValuePair<string, List<Person>> dict in addressBookDictionary)
                 {
-                    Console.WriteLine("{dict.Key}");
+                    Console.WriteLine($"{dict.Key}");
                     foreach (var addressBook in dict.Value)
                     {
                         PrintValues(addressBook);
@@ -219,7 +220,7 @@ namespace AdressBook
                     {
                         //removing from list
                         Console.WriteLine("***************DELETED****************");
-                        Console.WriteLine("You have deleted {x.firstName} contact");
+                        Console.WriteLine($"You have deleted {x.FirstName} contact");
                         people.Remove(x);
                         f = 1;
                         break;
@@ -235,6 +236,87 @@ namespace AdressBook
             {
                 Console.WriteLine("Your contact list is empty");
             }
+        }
+        public void SearchDetails()
+        {
+            string personName;
+            Console.WriteLine("1. Search by city name\n2.Search By state name\nEnter your option:");
+            switch (Convert.ToInt32(Console.ReadLine()))
+            {
+                case 1:
+                    Console.WriteLine("Enter the name of city in which you want to search:");
+                    string cityName = Console.ReadLine();
+                    Console.WriteLine("Enter the name of person you want to search:");
+                    personName = Console.ReadLine();
+                    SearchByCityName(cityName, personName);
+                    break;
+                case 2:
+                    Console.WriteLine("Enter the state of city in which you want to search:");
+                    string stateName = Console.ReadLine();
+                    Console.WriteLine("Enter the name of person you want to search:");
+                    personName = Console.ReadLine();
+                    SearchByStateName(stateName, personName);
+                    break;
+                default:
+                    return;
+
+            }
+        }
+            public void SearchByCityName(string cityName, string personName)
+        {
+            if (addressBookDictionary.Count > 0)
+            {
+
+                foreach (KeyValuePair<string, List<Person>> dict in addressBookDictionary)
+                {
+                    searchContacts = dict.Value.FindAll(x => x.FirstName.Equals(personName) && x.State.Equals(cityName));
+
+
+                }
+                if (searchContacts.Count > 0)
+                {
+                    foreach (var x in searchContacts)
+                    {
+                        PrintValues(x);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Person not found");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Adress book is empty");
+            }
+        }
+        public void SearchByStateName(string stateName, string personName)
+        {
+            if (addressBookDictionary.Count > 0)
+            {
+
+                foreach (KeyValuePair<string, List<Person>> dict in addressBookDictionary)
+                {
+                    searchContacts = dict.Value.FindAll(x => x.FirstName.Equals(personName) && x.State.Equals(stateName));
+
+                }
+                if (searchContacts.Count > 0)
+                {
+                    foreach (var x in searchContacts)
+                    {
+                        PrintValues(x);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine("Person not found");
+                }
+            }
+            else
+            {
+                Console.WriteLine("Adress book is empty");
+            }
+
         }
     }
 }
