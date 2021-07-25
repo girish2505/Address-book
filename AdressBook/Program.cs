@@ -11,7 +11,7 @@ namespace AdressBook
 
             while (true)
             {
-                Console.WriteLine("1. Add member to Contact list \n2. View Members in Contact List \n3. Delete members in Contact list \n4. Edit existing contact in List\n5. search a person\n6. Exit");
+                Console.WriteLine("1. Add member to Contact list \n2. View Members in Contact List \n3. Delete members in Contact list \n4. Edit existing contact in List\n5. search a person\n6.View person details by state or city \n7. Exit");
                 Console.WriteLine("\nEnter an option:");
                 int option = Convert.ToInt32(Console.ReadLine());
                 switch (option)
@@ -32,6 +32,9 @@ namespace AdressBook
                         addressBookDetails.SearchDetails();
                         break;
                     case 6:
+                        addressBookDetails.ViewDetails();
+                        break;
+                    default:
                         Console.WriteLine("exit");
                         break;
                 }
