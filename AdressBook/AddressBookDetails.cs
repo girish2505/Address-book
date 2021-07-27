@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace AdressBook
@@ -9,6 +10,7 @@ namespace AdressBook
         private List<Person> people;
         private static List<Person> searchContacts = new List<Person>();
         private static List<Person> viewContacts = new List<Person>();
+        List<Person> SortedList = new List<Person>();
         private int countCity = 0, countState = 0;
         private static Dictionary<string, List<Person>> addressBookDictionary = new Dictionary<string, List<Person>>();
         public void AddPerson()
@@ -35,7 +37,6 @@ namespace AdressBook
                 {
                     break;
                 }
-
             }
             Console.Write("Enter Number of contacts to add:");
             int numOfContacts = Convert.ToInt32(Console.ReadLine());
@@ -105,9 +106,7 @@ namespace AdressBook
             {
                 Console.WriteLine("Address Book is Empty");
             }
-
         }
-
         //Printing values
         public void PrintValues(Person x)
         {
@@ -344,7 +343,7 @@ namespace AdressBook
 
                 foreach (KeyValuePair<string, List<Person>> dict in addressBookDictionary)
                 {
-                    viewContacts = dict.Value.FindAll(x => x.State.Equals(cityName));
+                    viewContacts = dict.Value.FindAll(x => x.City.Equals(cityName));
                 }
                 if (searchContacts.Count > 0)
                 {
@@ -408,7 +407,6 @@ namespace AdressBook
                 default:
                     return;
             }
-
         }
         public void ViewByCityName(string cityName, string check)
         {
@@ -417,7 +415,7 @@ namespace AdressBook
 
                 foreach (KeyValuePair<string, List<Person>> dict in addressBookDictionary)
                 {
-                    viewContacts = dict.Value.FindAll(x => x.tate.Equals(cityName));
+                    viewContacts = dict.Value.FindAll(x => x.City.Equals(cityName));
                 }
                 if (check.Equals("view"))
                 {
@@ -427,7 +425,6 @@ namespace AdressBook
                         {
                             PrintValues(x);
                         }
-
                     }
                     else
                     {
@@ -439,7 +436,6 @@ namespace AdressBook
                     countCity = viewContacts.Count;
                     Console.WriteLine($"The total persons in {cityName} are : {countCity}");
                 }
-
             }
             else
             {
@@ -448,38 +444,41 @@ namespace AdressBook
         }
         public void ViewByStateName(string stateName, string check)
         {
-            if (addressBookDictionary.Count > 0)
+            foreach (KeyValuePair<string, List<Person>> dict in addressBookDictionary)
             {
-
-                foreach (KeyValuePair<string, List<Person>> dict in addressBookDictionary)
+                viewContacts = dict.Value.FindAll(x => x.State.Equals(stateName));
+            }
+            if (check.Equals("view"))
+            {
+                if (viewContacts.Count > 0)
                 {
-                    viewContacts = dict.Value.FindAll(x => x.State.Equals(stateName));
-                }
-                if (check.Equals("view"))
-                {
-                    if (viewContacts.Count > 0)
+                    foreach (var x in viewContacts)
                     {
-                        foreach (var x in viewContacts)
-                        {
-                            PrintValues(x);
-                        }
-
-                    }
-                    else
-                    {
-                        Console.WriteLine("No Details found ");
+                        PrintValues(x);
                     }
                 }
                 else
                 {
-                    countState = viewContacts.Count;
-                    Console.WriteLine($"The total persons in {stateName} are : {countState}");
+                    Console.WriteLine("No Details found ");
                 }
             }
             else
             {
-                Console.WriteLine("Adress book is empty");
+                countState = viewContacts.Count;
+                Console.WriteLine($"The total persons in {stateName} are : {countState}");
             }
+        }
+        public void SortList()
+        {
+            foreach (KeyValuePair<string, List<Person>> kvp in addressBookDictionary)
+            {
+                SortedList = kvp.Value.OrderBy(x => x.FirstName).ToList();
+                Console.WriteLine(kvp.Key);
+                foreach (var addressBook in SortedList)
+                {
+                    PrintValues(addressBook);
+                }
+            } 
         }
     }
 }

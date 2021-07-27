@@ -36,7 +36,7 @@ namespace AdressBook
                         break;
                     default:
                         Console.WriteLine("exit");
-                        break;
+                        return;
                 }
             }
         }
