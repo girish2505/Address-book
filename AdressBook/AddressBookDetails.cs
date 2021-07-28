@@ -175,10 +175,10 @@ namespace AdressBook
                                     Console.WriteLine("Phone Number Modified");
                                     break;
                                 case 8:
-                                     Console.Write("Enter new Email-id: ");
-                                     string emailId = Console.ReadLine();
-                                     person.Email = emailId;
-                                     Console.WriteLine("Email id Modified");
+                                    Console.Write("Enter new Email-id: ");
+                                    string emailId = Console.ReadLine();
+                                    person.Email = emailId;
+                                    Console.WriteLine("Email id Modified");
                                     break;
                                 case 9:
                                     // to exit from main method
@@ -260,7 +260,7 @@ namespace AdressBook
 
             }
         }
-            public void SearchByCityName(string cityName, string personName)
+        public void SearchByCityName(string cityName, string personName)
         {
             if (addressBookDictionary.Count > 0)
             {
@@ -470,15 +470,48 @@ namespace AdressBook
         }
         public void SortList()
         {
-            foreach (KeyValuePair<string, List<Person>> kvp in addressBookDictionary)
+            Console.WriteLine("1.Sort by person name\n2.Sort by city name\n3.Sort by state name\n4.Sort by zipcode\nEnter Your option");
+            switch (Convert.ToInt32(Console.ReadLine()))
             {
-                SortedList = kvp.Value.OrderBy(x => x.FirstName).ToList();
-                Console.WriteLine(kvp.Key);
+                case 1:
+                    SortByCityOrStateOrZipCode("firstname");
+                    break;
+                case 2:
+                    SortByCityOrStateOrZipCode("city");
+                    break;
+                case 3:
+                    SortByCityOrStateOrZipCode("state");
+                    break;
+                case 4:
+                    SortByCityOrStateOrZipCode("zipcode");
+                    break;
+            }
+        }
+        public void SortByCityOrStateOrZipCode(string check)
+        {
+            foreach (KeyValuePair<string, List<Person>> dict in addressBookDictionary)
+            {
+                switch (check)
+                {
+                    case "firstname":
+                        SortedList = dict.Value.OrderBy(x => x.FirstName).ToList();
+                        break;
+                    case "city":
+                        SortedList = dict.Value.OrderBy(x => x.City).ToList();
+                        break;
+                    case "state":
+                        SortedList = dict.Value.OrderBy(x => x.State).ToList();
+                        break;
+                    case "zipcode":
+                        SortedList = dict.Value.OrderBy(x => x.ZipCode).ToList();
+                        break;
+                }
+                Console.WriteLine("Displaying Sorted contact address book: {0}",dict.Key);
                 foreach (var addressBook in SortedList)
                 {
                     PrintValues(addressBook);
                 }
-            } 
+            }
         }
     }
 }
