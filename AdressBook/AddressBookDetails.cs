@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.IO;
 using System.Text;
 
 namespace AdressBook
@@ -511,6 +512,67 @@ namespace AdressBook
                 {
                     PrintValues(addressBook);
                 }
+            }
+        }
+        public void ReadFromFile()
+        {
+            string filePath = @"C:\Users\giris\source\repos\AdressBook\AdressBook\text.txt";
+            try
+            {
+                string[] fileContents = File.ReadAllLines(filePath);
+                var currentAbName = fileContents[0];
+                people = new List<Person>();
+                foreach (string i in fileContents.Skip(1))
+                {
+                    if (i.Contains(","))
+                    {
+                        Person person = new Person();
+                        string[] line = i.Split(",");
+                        person.FirstName = line[0];
+                        person.LastName = line[1];
+                        person.Address = line[2];
+                        person.City = line[3];
+                        person.State = line[4];
+                        person.ZipCode = Convert.ToInt32(line[5]);
+                        person.PhoneNumber = line[6];
+                        person.Email = line[7];
+                        people.Add(person);
+                    }
+                    else
+                    {
+                        addressBookDictionary.Add(currentAbName, people);
+                        currentAbName = i;
+                        people = new List<Person>();
+                    }
+                }
+                addressBookDictionary.Add(currentAbName, people);
+                Console.WriteLine("SuccessFully Added");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+        }
+        public void WriteToFile()
+        {
+            string filePath = @"C:\Users\giris\source\repos\AdressBook\AdressBook\text.txt";
+            try
+            {
+                File.WriteAllText(filePath, string.Empty);
+                foreach (KeyValuePair<string, List<Person>> dict in addressBookDictionary)
+                {
+                    File.AppendAllText(filePath, $"{dict.Key}\n");
+                    foreach (var addressBook in dict.Value)
+                    {
+                        string text = $"{addressBook.FirstName},{addressBook.LastName},{addressBook.Address},{addressBook.City},{addressBook.State},{addressBook.ZipCode},{addressBook.PhoneNumber},{addressBook.Email}\n";
+                        File.AppendAllText(filePath, text);
+                    }
+                }
+                Console.WriteLine("successfully stored in file");
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
             }
         }
     }
